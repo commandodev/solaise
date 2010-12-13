@@ -20,7 +20,7 @@ setup(name='solaise_cards',
       install_requires=[
           # -*- Extra requirements: -*-
       ],
-      console=['solaise_cards/console_cards.py'],
+      console=['solaise_cards/console_cards.py', 'solaise_cards/cards.py'],
       entry_points="""
       # -*- Entry points: -*-
       """,
