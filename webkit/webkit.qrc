@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>qtexample.qml</file>
+  </qresource>
+  <qresource prefix="newPrefix"/>
+</RCC>

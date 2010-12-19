@@ -140,6 +140,7 @@ if __name__ == "__main__":
 
     proxy = QtGui.QGraphicsProxyWidget()
     proxy.setWidget(buttonFrame)
+    proxy.setFlags(QtGui.QGraphicsItem.ItemIgnoresTransformations)
     scene.addItem(proxy)
     proxy.setPos(WINDOW_W-500, WINDOW_H)
     proxy.scale(1.5, 1.5)

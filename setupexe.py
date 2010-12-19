@@ -1,4 +1,5 @@
 from setuptools import setup, find_packages
+import py2exe
 
 version = '0.0'
 

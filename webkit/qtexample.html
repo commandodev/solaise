@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <script src="./jquery-1.4.4.js"></script>
+        <script src="./protovis-r3.2.js"></script>
+        <script src="./vis.js"></script>
+        <script type="text/javascript">
+            function sendJSON(data) {
+                alert(JSON.stringify(data));
+            }
+            function receiveJSON(data) {
+                element = document.getElementById('received');
+                element.innerHTML = element.innerHTML + "\n" + data;
+            }
+            function setRotation() {
+                element = document.getElementById('rotate');
+                angle = parseInt(element.value);
+                message = ['setRotation', angle];
+                sendJSON(message);
+            }
+            function sendStuff() {
+                sendJSON([42, 'PySide', 1.23, true, {'a':1,'b':2}]);
+            }
+
+            function receiveData(data) {
+                build_vis(data);
+            }
+
+            function data_cb(data){
+                alert(data);
+            }
+
+            fs_u1f = function(tmp) {
+                try {
+                    print("msft: " + tmp.MSFT.l10);
+                } catch(ex) {
+                }
+                try {
+                    print("java: " + tmp.JAVA.l10);
+                } catch(ex) {
+                }
+            };
+
+            yfs_mktmcb = function(tmp) {
+                /*ignore timestamp */
+            };
+
+
+
+
+            function ts_cb(data){
+                alert(data);
+            }
+        </script>
+        <script>
+            STREAMER = "http://streamerapi.finance.yahoo.com/streamer/1.0?s=JAVA,MSFT&k=l10&callback=data_cb&mktmcb=yfs_mktmcb&gencallback=yfs_gencb"
+            $(function(){
+
+                    $('#rotate-btn').click(function(evt){
+                        //alert('click');
+                        sendJSON(['setRotation', parseInt($('#rotate').val())]);
+                    });
+                    $.getJSON(STREAMER, ts_cb);
+            });
+        </script>
+    </head>
+    <body>
+        <h2>PySide + QML + WebKit FTW</h2>
+        <p>
+        Set rotation:
+        <input type="text" size="5" id="rotate" value="10"/>
+        <button id="rotate-btn">Click me now!</button>
+        </p>
+        <p>
+        Send arbitrary data structures:
+        <button onclick="sendStuff()">No, click me!</button>
+        </p>
+        <p>Received stuff:</p>
+        <pre id="received"></pre>
+        <div id="vis-target"></div>
+    </body>
+</html>
